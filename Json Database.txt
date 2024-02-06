@@ -1,0 +1,34 @@
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import LoginForm from './Login';
+import RegisterForm from './Register';
+import AddTask from './AddTask';
+import DeleteTask from './DeleteTask';
+
+const getTasksFromLocalStorage = () => {
+  const storedTasks = localStorage.getItem('tasks');
+  return storedTasks ? JSON.parse(storedTasks) : [];
+};
+
+const saveTasksToLocalStorage = (tasks) => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+};
+
+function App() {
+  const [tasks, setTasks] = useState(getTasksFromLocalStorage());
+  // ... other state variables
+
+  useEffect(() => {
+    saveTasksToLocalStorage(tasks);
+  }, [tasks]);
+
+  // ... rest of the code
+
+  return (
+    <div className="container mt-4">
+      {/* ... rest of the code */}
+    </div>
+  );
+}
+
+export default App;
